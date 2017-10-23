@@ -9,4 +9,4 @@ This is a python / HTML template that you can hook up your NLG model to for peop
 TBD
 
 ### Authors
-Maarten Sap, other peeps!# NLGWebsite
+Maarten Sap, other peeps!
