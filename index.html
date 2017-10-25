@@ -1,6 +1,39 @@
+<!DOCTYPE html>
 <head>
+	<script src="tools/jquery-3.1.1.min.js"></script>
+  <script src="tools/bootstrap.min.js"></script>
+  <script src="tools/nlgWebsite.js"></script>
+  <link rel="stylesheet" href="tools/bootstrap.min.css">
+  <link rel="stylesheet" href="tools/style.css">
 </head>
 
 <body>
-  Hello World
+	<div class="container">
+		<div class="page-header">
+  		<h1>NLG demo</h1>
+  		<h2><small>Test out an NLG system here!</small></h2>
+  	</div>
+  	<div class="row">
+  		<div class="col-sm-12">
+  			<form>
+  				<input id="enableDialogue" type="checkbox" onchange="checkboxes(this)">&nbsp;This is a dialogue
+  				<br>
+  				<input id="separateTalkTurns" type="checkbox" onchange="checkboxes(this)">&nbsp;These are disconnected tries
+  			</form>		
+  		</div>
+  	</div>
+  	<hr>
+  	<div class="row">
+  		<div class="col-sm-6">
+  			<div id="history"></div>
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-sm-12">
+  			<textarea id="inputfield" rows="2" cols="100" style="color: grey;font-style: italic;">Enter your text here.</textarea>
+  			<br>
+  			<button class="btn btn-primary" onclick="getResponse()">Submit</button>
+  		</div>
+  	</div>
+  </div>
 </bod>

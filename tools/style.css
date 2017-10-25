@@ -1,0 +1,16 @@
+.textblurb {
+
+}
+.user {
+	color:blue;
+}
+.nlg {
+	color:black;
+}
+.nlg.dialogue {
+	text-align: right;
+}
+
+.removable {
+	display: none;
+}
