@@ -2,6 +2,7 @@
 
 from http.server import BaseHTTPRequestHandler, HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import parse_qs, parse_qsl, urlparse
+import os
 from IPython import embed
 #import SocketServer
 
@@ -17,9 +18,12 @@ class MyServer(SimpleHTTPRequestHandler):
     self.send_header('Content-type', 'text/html')
     self.end_headers()
 
+  def do_GET(self):
+    self.path = self.server.wd+self.path
+    super(MyServer,self).do_GET()
+    
   def do_POST(self):
     params = parse_qs(urlparse(self.path).query)
-    
     # it's a list in case there's duplicates
     inputText = params["inputText"][0] 
     inputText = inputText.replace("|||","\n").strip()
@@ -28,14 +32,15 @@ class MyServer(SimpleHTTPRequestHandler):
     self._set_headers()
     self.wfile.write(response.encode())
     
-def run(serverClass=HTTPServer, handlerClass=MyServer):
+def run(nlg, serverClass=HTTPServer, handlerClass=MyServer):
   serverAddress = ('', 8000)
   httpd = serverClass(serverAddress, handlerClass)
   
-  httpd.nlgModel = MyModel()
+  httpd.nlgModel = nlg
+  httpd.wd = os.path.dirname(__file__)
   
-  print("Listening")
+  print("Listening at",serverAddress)
   httpd.serve_forever()
 
 if __name__ == '__main__':
-  run()
+  run(nlg=MyModel())
