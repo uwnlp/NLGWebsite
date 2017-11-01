@@ -11,6 +11,7 @@ function getResponse(){
   hist = document.getElementById("history");
   hist.innerHTML += `<div class="history user">${prompt}</div>`;
   inpF.value = "";
+  console.log([inpF.value]);
   console.log(prompt);
 
   // Sending stuff to server (for now, no server)
@@ -24,6 +25,8 @@ function getResponse(){
       nlgResponse = xmlHttp.responseText;
       hist.innerHTML += `<div class="history nlg">${nlgResponse}</div>`;
       hist.innerHTML += `<hr class="removable">`;
+      checkboxes(document.getElementById("enableDialogue"));
+      checkboxes(document.getElementById("separateTalkTurns"));
     }
   }
   xmlHttp.open("POST", window.location.href+"?inputText="+toSend, true);
@@ -59,10 +62,9 @@ function setup(){
       inpF.value = inpFdefault;
     }
   };
-  inpF.onkeypress = function(e){
+  inpF.onkeyup = function(e){
     if (e.keyCode === 13 && !e.shiftKey){
       getResponse();
-      //inpF.blur();
     }
   };
 }
