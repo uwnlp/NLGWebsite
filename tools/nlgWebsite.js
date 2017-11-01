@@ -15,16 +15,19 @@ function getResponse(){
 
   // Sending stuff to server (for now, no server)
   var nlgResponse = "SWABHA's MY FAVORITE NLPer!";
-  hist.innerHTML += `<div class="history nlg">${nlgResponse}</div>`;
-  hist.innerHTML += `<hr class="removable">`;
-  var toSend = hist.innerText;
-  /*var xmlHttp = new XMLHttpRequest();
+
+  var toSend = $.trim(hist.innerText).replace(/\n/g,"|||");
+  var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = function() { 
-  	if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-      callback(xmlHttp.responseText);
+  	if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+      console.log(xmlHttp.responseText);
+      nlgResponse = xmlHttp.responseText;
+      hist.innerHTML += `<div class="history nlg">${nlgResponse}</div>`;
+      hist.innerHTML += `<hr class="removable">`;
+    }
   }
-  xmlHttp.open("GET", "localhost", true);
-  xmlHttp.send();*/
+  xmlHttp.open("POST", window.location.href+"?inputText="+toSend, true);
+  xmlHttp.send();
 }
 
 function checkboxes(cb){
