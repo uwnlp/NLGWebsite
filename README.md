@@ -7,9 +7,14 @@ This is a python / HTML template that you can hook up your NLG model to for peop
 
 ## Running the NLG demo
 ### Connect your NLG model
+The easiest thing to do is to create a symbolic link from the repo to the project/model folder
+```bash
+ln -s SOMEWHERE/nlgwebsite YOUR_PROJECT_DIRECTORY
+```
+
 Import the main server method
 ```python
-from server import run
+from nlgwesbite.server import run
 ```
 
 Your NLG model must be create, instantiated and loaded

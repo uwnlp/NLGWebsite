@@ -17,7 +17,12 @@ function getResponse(){
   // Sending stuff to server (for now, no server)
   var nlgResponse = "SWABHA's MY FAVORITE NLPer!";
 
-  var toSend = $.trim(hist.innerText).replace(/\n/g,"|||");
+  var toSend;
+  if (document.getElementById("separateTalkTurns").checked){
+    toSend = $.trim(prompt).replace(/\n/g,"|||");
+  } else {
+    toSend = $.trim(hist.innerText).replace(/\n/g,"|||");
+  }
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = function() { 
   	if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
