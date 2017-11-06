@@ -2,8 +2,7 @@
 This is a python / HTML template that you can hook up your NLG model to for people to interact with.
  
 ## Dependencies
-- python3
-- ?
+- python3 (`http.server` and `urllib.parse` native libraries)
 
 ## Running the NLG demo
 ### Connect your NLG model
