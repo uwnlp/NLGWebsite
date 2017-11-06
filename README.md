@@ -14,7 +14,8 @@ ln -s SOMEWHERE/nlgwebsite YOUR_PROJECT_DIRECTORY
 
 Import the main server method
 ```python
-from nlgwesbite.server import run
+sys.path.append("nlgwebsite")
+from server import run
 ```
 
 Your NLG model must be create, instantiated and loaded
@@ -36,4 +37,4 @@ run(nlg = myNLGmodel)
 Then go to your web browser and access the page through http://localhost:8000 (or wherever your server is running).
 
 ### Authors
-Maarten Sap, other peeps!
+Maarten Sap (& maybe other peeps!)
