@@ -3,8 +3,10 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import parse_qs, parse_qsl, urlparse
 import os
-from IPython import embed
-#import SocketServer
+try:
+  from IPython import embed
+except:
+  pass
 
 class MyModel():
   def getOutput(inputStr):
@@ -33,16 +35,27 @@ class MyServer(SimpleHTTPRequestHandler):
     self._set_headers()
     self.wfile.write(response.encode())
     
-def run(nlg, serverClass=HTTPServer, handlerClass=MyServer):
-  serverAddress = ('0.0.0.0', 8000)
+def runNoClass(output_f,port=8000,serverClass=HTTPServer,
+               handlerClass=MyServer,https=False):
+  serverAddress = ('0.0.0.0', port)
   httpd = serverClass(serverAddress, handlerClass)
   
-  httpd.nlgModel = nlg
+  httpd.output_f = output_f
   httpd.wd = os.path.dirname(__file__)
+  if https:
+    httpd.socket = ssl.wrap_socket(
+      httpd.socket, 
+      keyfile=os.path.join(httpd.wd,"key.pem"),
+      certfile=os.path.join(httpd.wd,"cert.pem"),
+      server_side=True)
   
   print("Listening at",serverAddress)
   print(httpd.wd)
   httpd.serve_forever()
+
+def run(nlg,port=8000,serverClass=HTTPServer,
+        handlerClass=MyServer,https=False):
+  runNoClass(nlg.getOutput, port, serverClass,handlerClass,https)
 
 if __name__ == '__main__':
   run(nlg=MyModel())
