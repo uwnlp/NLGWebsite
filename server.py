@@ -31,7 +31,8 @@ class MyServer(SimpleHTTPRequestHandler):
     inputText = params["inputText"][0] 
     inputText = inputText.replace("|||","\n").strip()
     print([inputText])
-    response = self.server.nlgModel.getOutput(inputText)
+    # response = self.server.nlgModel.getOutput(inputText)
+    response = self.server.output_f(inputText)
     self._set_headers()
     self.wfile.write(response.encode())
     
