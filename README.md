@@ -40,6 +40,7 @@ You can also run the server with just an output function that takes a str and ou
 ```python
 runNoClass(myOutputFunction)
 ```
+## See [example running script](testProjectDir/README.md)
 
 ### Authors
 Maarten Sap (& maybe other peeps!)
