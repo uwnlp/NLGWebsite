@@ -42,7 +42,7 @@ def runNoClass(output_f,port=8000,serverClass=HTTPServer,
   httpd = serverClass(serverAddress, handlerClass)
   
   httpd.output_f = output_f
-  httpd.wd = os.path.dirname(__file__)
+  httpd.wd = os.path.basename(os.path.dirname(__file__))
   if https:
     httpd.socket = ssl.wrap_socket(
       httpd.socket, 
